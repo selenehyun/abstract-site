@@ -68,7 +68,7 @@ class Board {
     }
 }
 class Article {
-    constructor(article, content, author, subject) {
+    constructor(article) {
         this.subject = article.subject;
         this.content = article.content;
         this.author = article.author;
@@ -79,7 +79,12 @@ class Article {
         this.registerCheck = false;
 
         //! subject, content, author 를 포함한다. null,'' 는 포함되지 않는다.
-        if ((subject && content && author === '') || (subject && content && author === null)) {
+        if (article.subject === '' || article.subject === null) {
+            throw new Error('ㅠㅠㅠ ');
+            //= > WIL 쓸거
+        } else if (article.content === '' || article.content === null) {
+            throw new Error('ㅠㅠㅠ ');
+        } else if (article.author === '' || article.author === null) {
             throw new Error('ㅠㅠㅠ ');
         }
     }
@@ -103,11 +108,14 @@ class Article {
 }
 
 class Comment {
-    constructor(comment, content, author) {
+    constructor(comment) {
         this.content = comment.content;
         this.author = comment.author;
 
-        if ((content && author === '') || (content && author === null)) {
+        if (comment.author === '' || comment.author === null) {
+            //= > WIL 쓸거
+            throw new Error('ㅠㅠㅠ ');
+        } else if (comment.author === '' || comment.author === null) {
             throw new Error('ㅠㅠㅠ ');
         }
     }
