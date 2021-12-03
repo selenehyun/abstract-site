@@ -32,7 +32,7 @@ class Board {
     // constructor(name){ // => name 을 이용하여 외부에서 주어진 값을 받는데, 암것도 안함
 
     constructor(name) {
-        // name 데이터를 포함한다, null, 공백은 허용하지 않는다
+        // !name 데이터를 포함한다, null, 공백은 허용하지 않는다
         this.name = name;
         this.articles = [];
 
@@ -57,7 +57,9 @@ class Board {
         } // 에러 던지고 함수 종료
         article.id = `${this.name}-${Math.floor(Math.random() * 10)}`; // 0~1까지 난수 발생
         //
+
         article.createdDate = date.toISOString();
+        article.registerCheck = true;
         this.articles.push(article); // 아니면 article추가
     }
 
@@ -66,18 +68,50 @@ class Board {
     }
 }
 class Article {
-    constructor(article) {
+    constructor(article, content, author, subject) {
         this.subject = article.subject;
         this.content = article.content;
         this.author = article.author;
         this.id = ''; // 설정
         this.createdDate = '';
-        this.comment = [];
+
+        this.comments = [];
+        this.registerCheck = false;
+
+        //! subject, content, author 를 포함한다. null,'' 는 포함되지 않는다.
+        if ((subject && content && author === '') || (subject && content && author === null)) {
+            throw new Error('ㅠㅠㅠ ');
+        }
+    }
+
+    reply(comment) {
+        const date = new Date(); // 참조변수
+
+        if (this.registerCheck == false) {
+            // 등록이 안되어 있으면
+            throw new Error('ㅠㅠㅠ ');
+        } // 에러 던지고 함수 종료
+        comment.id = `${this.name}-${Math.floor(Math.random() * 10)}`; // 날짜 생성 함수
+
+        comment.createdDate = date.toISOString();
+        this.comments.push(comment); // comment 추가
+    }
+
+    getAllComments() {
+        return this.comments;
     }
 }
 
-class Comment {}
+class Comment {
+    constructor(comment, content, author) {
+        this.content = comment.content;
+        this.author = comment.author;
 
+        if ((content && author === '') || (content && author === null)) {
+            throw new Error('ㅠㅠㅠ ');
+        }
+    }
+}
 module.exports = {
     Site,
     Board,
