@@ -52,20 +52,20 @@ class Board {
 }
 
 class Article {
-    constructor(Article) {
+    constructor(article) {
         try {
-            if (Article['subject'] === '' || Article['subject'] === null)
+            if (article['subject'] === '' || article['subject'] === null)
                 throw new Error('빈 문자열이나 null은 안됩니다.');
-            if (Article['content'] === '' || Article['content'] === null)
+            if (article['content'] === '' || article['content'] === null)
                 throw new Error('빈 문자열이나 null은 안됩니다.');
-            if (Article['author'] === '' || Article['author'] === null)
+            if (article['author'] === '' || article['author'] === null)
                 throw new Error('빈 문자열이나 null은 안됩니다.');
         } catch (error) {
             throw error;
         }
-        this.subject = Article['subject'];
-        this.content = Article['content'];
-        this.author = Article['author'];
+        this.subject = article['subject'];
+        this.content = article['content'];
+        this.author = article['author'];
         this.createdDate = new Date().toISOString();
         this.published = false;
         this.comments = [];
